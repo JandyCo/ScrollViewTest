@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project>
+
+	<meta title="ScrollViewTest" package="com.jandyco.scrollviewtest" version="1.0.0" company="JandyCo LLC" />
+	<app main="Main" path="Export" file="ScrollViewTest" />
+
+    <window fps="62"  hardware="true" vsync="false" unless="web" />
+
+	<source path="Source" />
+
+	<haxelib name="openfl" />
+	<haxelib name="actuate" />
+
+</project>
