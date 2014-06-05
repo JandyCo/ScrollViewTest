@@ -113,4 +113,8 @@ class ScrollView extends Sprite {
     override public function swapChildrenAt(index1:Int, index2:Int):Void {
         return content.swapChildrenAt(index1,index2);
     }
+
+    public function toggleCacheAsBitmap() {
+        this.content.toggleCacheAsBitmap();
+    }
 }

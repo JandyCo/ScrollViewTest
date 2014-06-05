@@ -20,6 +20,7 @@ class Main extends Sprite {
 
         createFPS();
         createMaskToggle();
+        createCacheAsBitmapToggle();
 		
         var sp = createSquare(0x0000FF);
         scrollView.addChild(sp);
@@ -50,19 +51,32 @@ class Main extends Sprite {
     }
 
     private function createMaskToggle() {
-       var textField = new TextField(); 
-       textField.defaultTextFormat = new openfl.text.TextFormat(null, 32);
-       textField.autoSize = openfl.text.TextFieldAutoSize.LEFT;
-
-       textField.text = "Enable Mask";
+       var textField = createText("Enable Mask", 100, 50);
        textField.addEventListener(MouseEvent.CLICK, function (event : MouseEvent) {
             textField.text = textField.text == "Enable Mask" ? "Disable Mask" : "Enable Mask";
             scrollView.toggleMask();
        });
-       textField.x = 100;
-       textField.y = 50;
-       addChild(textField);
+    }
+
+    private function createCacheAsBitmapToggle() {
+       var textField = createText("Enable Cache As Bitmap", 100, 100);
+       textField.addEventListener(MouseEvent.CLICK, function (event : MouseEvent) {
+            textField.text = textField.text == "Enable Cache As Bitmap" ? "Disable Cache As Bitmap" : "Enable Cache As Bitmap";
+            scrollView.toggleCacheAsBitmap();
+       });
     }
 	
+    public function createText(text, x, y) {
+        var textField = new TextField(); 
+       textField.defaultTextFormat = new openfl.text.TextFormat(null, 32);
+       textField.autoSize = openfl.text.TextFieldAutoSize.LEFT;
+
+       textField.text = text;
+
+       textField.x = x;
+       textField.y = y;
+       addChild(textField);
+       return textField;
+    }
 	
 }

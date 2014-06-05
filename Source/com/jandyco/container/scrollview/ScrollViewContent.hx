@@ -10,10 +10,13 @@ class ScrollViewContent extends Sprite {
 
     public function new(width, height) {
         super();
-        this.cacheAsBitmap = true;
         this.scrollRect = new Rectangle(0,0,width,height);
         this.graphics.beginFill(0x000000,0);
         this.graphics.drawRect(0,0,width,height);
+    }
+
+    public function toggleCacheAsBitmap() {
+        this.cacheAsBitmap = !this.cacheAsBitmap;
     }
 
     public function get_scrollX() {
