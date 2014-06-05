@@ -1,22 +1,25 @@
 package;
 
 import openfl.display.Sprite;
+import openfl.display.Shape;
+
+import openfl.events.MouseEvent;
+
+import openfl.text.TextField;
 
 import com.jandyco.container.ScrollView;
 
 
 class Main extends Sprite {
+    private var scrollView : ScrollView;
 	
 	public function new () {
-		
 		super ();
-		var scrollView = new ScrollView({width:stage.stageWidth, height:stage.stageHeight});
+		scrollView = new ScrollView({width:stage.stageWidth, height:stage.stageHeight});
 		addChild(scrollView);
 
-        var fps = new openfl.display.FPS(100,0,0x000000);
-        fps.defaultTextFormat = new openfl.text.TextFormat(null,32);
-        fps.autoSize = openfl.text.TextFieldAutoSize.LEFT;
-        addChild(fps);
+        createFPS();
+        createMaskToggle();
 		
         var sp = createSquare(0x0000FF);
         scrollView.addChild(sp);
@@ -37,6 +40,28 @@ class Main extends Sprite {
         sp.graphics.drawRect(0,0,100,100);
         sp.graphics.endFill();
         return sp;
+    }
+
+    private function createFPS() {
+        var fps = new openfl.display.FPS(100,0,0x000000);
+        fps.defaultTextFormat = new openfl.text.TextFormat(null,32);
+        fps.autoSize = openfl.text.TextFieldAutoSize.LEFT;
+        addChild(fps);
+    }
+
+    private function createMaskToggle() {
+       var textField = new TextField(); 
+       textField.defaultTextFormat = new openfl.text.TextFormat(null, 32);
+       textField.autoSize = openfl.text.TextFieldAutoSize.LEFT;
+
+       textField.text = "Enable Mask";
+       textField.addEventListener(MouseEvent.CLICK, function (event : MouseEvent) {
+            textField.text = textField.text == "Enable Mask" ? "Disable Mask" : "Enable Mask";
+            scrollView.toggleMask();
+       });
+       textField.x = 100;
+       textField.y = 50;
+       addChild(textField);
     }
 	
 	

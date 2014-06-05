@@ -18,6 +18,8 @@ class ScrollView extends Sprite {
     private var maxWidth : Float;
     private var maxHeight : Float;
 
+    private var clipMask  : Shape;
+
     public function new(?style : Dynamic) {
         super();
 
@@ -25,6 +27,7 @@ class ScrollView extends Sprite {
         maxHeight = style !=null && style.height != null ? style.height : openfl.Lib.stage.stageHeight;
         createBackground();
         createClippingMask();
+        toggleMask();
         content = new ScrollViewContent(maxWidth, maxHeight);
         super.addChild(content);
         scrollBehavior = new BasicScrollBehavior(this);
@@ -41,11 +44,19 @@ class ScrollView extends Sprite {
         super.addChild(background);
     }
 
+    public function toggleMask() {
+        if (this.mask != null) {
+            this.mask = null;
+        } else {
+            this.mask = clipMask;
+        }
+    }
+
     /**
      * Create a shape to clip the display of the scrollview contents to its height and width.
      */
     private function createClippingMask() {
-        var clipMask = new Shape();
+        clipMask = new Shape();
         clipMask.graphics.beginFill(0xFF0000);
         clipMask.graphics.drawRect(this.x, this.y, maxWidth, maxHeight);
         this.mask = clipMask;
